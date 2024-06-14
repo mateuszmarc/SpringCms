@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import pl.coderslab.article.Article;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,4 +22,9 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
+
+    @OneToMany(mappedBy = "author")
+    private List<Article> articles;
+
+
 }
