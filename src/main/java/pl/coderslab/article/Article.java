@@ -40,6 +40,7 @@ public class Article {
     @JoinTable(name = "articles_categories",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @ToString.Exclude
     private List<Category> categories;
 
     @PrePersist

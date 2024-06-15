@@ -24,7 +24,7 @@ public class Author {
     private String lastName;
 
     @OneToMany(mappedBy = "author")
+    @ToString.Exclude
     private List<Article> articles;
-
 
 }

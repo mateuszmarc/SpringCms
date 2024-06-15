@@ -24,5 +24,7 @@ public class Category {
     private String description;
 
     @ManyToMany(mappedBy = "categories")
+    @ToString.Exclude
     private List<Article> articles;
+
 }
