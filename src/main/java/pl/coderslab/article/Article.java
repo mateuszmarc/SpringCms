@@ -9,6 +9,7 @@ import pl.coderslab.category.Category;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -40,8 +41,7 @@ public class Article {
     @JoinTable(name = "articles_categories",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    @ToString.Exclude
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
