@@ -16,12 +16,26 @@ public class CategoryService {
     private final CategoryDao categoryDao;
     private final ArticleDao articleDao;
 
-    private void saveCategory(Category category) {
+    public void saveCategory(Category category) {
         categoryDao.save(category);
         category.getArticles().forEach(
                 article -> {
-                    article.getCategories().add(category);
-                    articleDao.update(article);
+                    Optional<Article> optionalArticle = articleDao.findById(article.getId());
+
+                    optionalArticle.ifPresent(
+                            article1 -> {
+
+                                article.setTitle(article1.getTitle());
+                                article.setAuthor(article1.getAuthor());
+                                article.setContent(article1.getContent());
+                                article.getCategories().addAll(article1.getCategories());
+                                article.setCreated(article1.getCreated());
+                                article.setUpdated(article1.getUpdated());
+
+                                articleDao.update(article);
+
+                            }
+                    );
                 }
         );
     }

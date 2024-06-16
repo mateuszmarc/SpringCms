@@ -26,6 +26,7 @@ public class CategoryDao {
             Hibernate.initialize(category.getArticles());
             return Optional.of(category);
         }).orElseGet(Optional::empty);
+
     }
 
     public void update(Category category) {

@@ -2,6 +2,7 @@ package pl.coderslab.author;
 
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -25,7 +26,6 @@ public class AuthorDao {
             Hibernate.initialize(author.getArticles());
             return Optional.of(author);
         }).orElseGet(Optional::empty);
-
     }
 
     public void update(Author author) {
