@@ -7,6 +7,7 @@ import lombok.ToString;
 import pl.coderslab.article.Article;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,6 +26,6 @@ public class Author {
 
     @OneToMany(mappedBy = "author")
     @ToString.Exclude
-    private List<Article> articles;
+    private List<Article> articles = new ArrayList<>();
 
 }
