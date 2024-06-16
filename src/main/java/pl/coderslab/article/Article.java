@@ -53,4 +53,8 @@ public class Article {
         this.updated = LocalDateTime.now();
     }
 
+    public void setAuthor(Author author) {
+        this.author = author;
+        author.getArticles().add(this);
+    }
 }
