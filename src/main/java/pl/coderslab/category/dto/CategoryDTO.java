@@ -1,4 +1,4 @@
-package pl.coderslab.category;
+package pl.coderslab.category.dto;
 
 import lombok.Data;
 

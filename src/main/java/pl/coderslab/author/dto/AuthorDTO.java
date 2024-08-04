@@ -1,4 +1,4 @@
-package pl.coderslab.author;
+package pl.coderslab.author.dto;
 
 import lombok.Data;
 

@@ -1,8 +1,8 @@
-package pl.coderslab.article;
+package pl.coderslab.article.dto;
 
 import lombok.Data;
-import pl.coderslab.author.AuthorDTO;
-import pl.coderslab.category.CategoryDTO;
+import pl.coderslab.author.dto.AuthorDTO;
+import pl.coderslab.category.dto.CategoryDTO;
 
 import java.util.List;
 
