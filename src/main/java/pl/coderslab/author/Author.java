@@ -1,8 +1,6 @@
 package pl.coderslab.author;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import lombok.ToString;
 import pl.coderslab.article.Article;
 
@@ -10,10 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
+@Data
 @Entity
 @Table(name = "authors")
 public class Author {
