@@ -40,7 +40,8 @@ public class Article {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH
-    })
+    },
+            fetch = FetchType.EAGER)
     @JoinTable(name = "articles_categories",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))

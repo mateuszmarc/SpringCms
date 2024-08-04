@@ -24,7 +24,8 @@ public class Author {
                     CascadeType.DETACH,
                     CascadeType.MERGE,
                     CascadeType.REFRESH
-            })
+            },
+            fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Article> articles = new ArrayList<>();
 
