@@ -19,7 +19,12 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author",
+            cascade = {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH
+            })
     @ToString.Exclude
     private List<Article> articles = new ArrayList<>();
 

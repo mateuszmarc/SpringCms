@@ -19,7 +19,12 @@ public class Category {
     private String name;
     private String description;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories",
+            cascade = {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH
+            })
     @ToString.Exclude
     private List<Article> articles = new ArrayList<>();
 

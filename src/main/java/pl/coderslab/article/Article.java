@@ -1,8 +1,6 @@
 package pl.coderslab.article;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import lombok.ToString;
 import pl.coderslab.author.Author;
 import pl.coderslab.category.Category;
@@ -12,10 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "articles")
 public class Article {
@@ -33,11 +28,19 @@ public class Article {
 
     private LocalDateTime updated;
 
-    @ManyToOne
+    @ManyToOne(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    })
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToMany
+    @ManyToMany(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    })
     @JoinTable(name = "articles_categories",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
