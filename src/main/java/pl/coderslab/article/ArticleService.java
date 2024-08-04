@@ -41,7 +41,7 @@ public class ArticleService {
 
         if (author != null) {
             article.getAuthor().removeArticle(article);
-            authorDao.update(article.getAuthor());
+            authorDao.save(article.getAuthor());
 
         }
 
