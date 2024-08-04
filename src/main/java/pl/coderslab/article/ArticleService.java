@@ -47,7 +47,7 @@ public class ArticleService {
 
         article.getCategories().forEach(category -> {
             category.removeArticle(article);
-            categoryDao.update(category);
+            categoryDao.save(category);
         });
 
         return article;
@@ -60,9 +60,9 @@ public class ArticleService {
 
         updateArticleFields(article, foundArticle);
 
-        articleDao.save(article);
+        articleDao.save(foundArticle);
 
-        return article;
+        return foundArticle;
     }
 
 

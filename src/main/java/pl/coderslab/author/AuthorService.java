@@ -35,8 +35,8 @@ public class AuthorService {
 
         updateAuthorFields(author, foundAuthor);
 
-        authorDao.save(author);
-        return author;
+        authorDao.save(foundAuthor);
+        return foundAuthor;
     }
 
     public Author deleteById(Long id) {

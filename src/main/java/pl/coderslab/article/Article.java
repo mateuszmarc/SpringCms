@@ -57,4 +57,13 @@ public class Article {
         this.updated = LocalDateTime.now();
     }
 
+
+    public void addCategory(Category category) {
+        removeCategory(category);
+        categories.add(category);
+    }
+
+    public void removeCategory(Category category) {
+        categories.removeIf(category1 -> category1.getId().equals(category.getId()));
+    }
 }

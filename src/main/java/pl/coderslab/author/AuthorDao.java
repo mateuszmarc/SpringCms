@@ -4,11 +4,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public class AuthorDao {
 
     @PersistenceContext
