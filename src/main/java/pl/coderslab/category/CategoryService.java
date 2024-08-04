@@ -3,6 +3,8 @@ package pl.coderslab.category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.article.ArticleDao;
+import pl.coderslab.category.dto.CategoryDTO;
+import pl.coderslab.category.dto.CategoryMapper;
 import pl.coderslab.exception.ResourceNotFoundException;
 
 import javax.transaction.Transactional;
@@ -15,35 +17,47 @@ public class CategoryService {
 
     private final CategoryDao categoryDao;
     private final ArticleDao articleDao;
+    private final CategoryMapper categoryMapper;
 
-    public Category findById(Long id) {
+    public CategoryDTO findById(Long id) {
 
         Optional<Category> optionalCategory = categoryDao.findById(id);
 
+
         return optionalCategory
+                .map(categoryMapper::toDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Category with id: %s not found".formatted(id)));
     }
 
-    public Category save(Category category) {
+    public CategoryDTO save(CategoryDTO categoryDTO) {
+
+        Category category = categoryMapper.toEntity(categoryDTO);
 
         categoryDao.save(category);
 
-        return category;
+        return categoryMapper.toDTO(category);
     }
 
 
-    public Category update(Category category) {
+    public CategoryDTO update(Category category) {
 
-        Category foundCategory = findById(category.getId());
+        Optional<Category> optionalCategory = categoryDao.findById(category.getId());
+
+        Category foundCategory = optionalCategory
+                .orElseThrow(() -> new ResourceNotFoundException("Category with id: %s not found".formatted(category.getId())));
 
         updateCategoryFields(category, foundCategory);
 
         categoryDao.save(foundCategory);
-        return foundCategory;
+
+        return categoryMapper.toDTO(foundCategory);
     }
 
-    public Category deleteById(Long id) {
-        Category category = findById(id);
+    public CategoryDTO deleteById(Long id) {
+        Optional<Category> optionalCategory = categoryDao.findById(id);
+
+        Category category = optionalCategory
+                .orElseThrow(() -> new ResourceNotFoundException("Category with id: %s not found".formatted(id)));
 
         category.getArticles().forEach(article -> {
             article.removeCategory(category);
@@ -51,7 +65,7 @@ public class CategoryService {
         });
 
         categoryDao.delete(category);
-        return category;
+        return categoryMapper.toDTO(category);
     }
 
 

@@ -1,14 +1,20 @@
 package pl.coderslab.article;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.coderslab.article.dto.ArticleDTO;
+import pl.coderslab.article.dto.ArticleMapper;
 import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorDao;
 import pl.coderslab.category.CategoryDao;
 import pl.coderslab.exception.InvalidRequestException;
 import pl.coderslab.exception.ResourceNotFoundException;
 
+import java.util.Optional;
+
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 @Service
@@ -17,25 +23,39 @@ public class ArticleService {
     private final ArticleDao articleDao;
     private final AuthorDao authorDao;
     private final CategoryDao categoryDao;
+    private final ArticleMapper articleMapper;
 
-    public Article findArticleById(Long id) {
+    public ArticleDTO findArticleById(Long id) {
 
-        return articleDao.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Article with id: %s not found.".formatted(id)));
+        Optional<Article> article = articleDao.findById(id);
+
+        return article.map(articleMapper::toDTO)
+                .orElseThrow(() -> new ResourceNotFoundException("Article with id: %s not found".formatted(id)));
     }
 
-    public Article save(Article article) {
-        if (article.getId() != null) {
+    public Article save(ArticleDTO articleDTO) {
+        if (articleDTO.getId() != null) {
             throw new InvalidRequestException("Article to save should not have its id set");
         }
-        articleDao.save(article);
 
-        return article;
+        Article articleToSave = articleMapper.toEntity(articleDTO);
+
+
+        articleDao.save(articleToSave);
+
+        log.info("{}", articleToSave.getCategories());
+        return articleToSave;
     }
 
     public Article deleteById(Long id) {
 
-        Article article = findArticleById(id);
+        Optional<Article> optionalArticle = articleDao.findById(id);
+
+        if (optionalArticle.isEmpty()) {
+            throw new ResourceNotFoundException("Article with id: %s not found".formatted(id));
+        }
+
+        Article article = optionalArticle.get();
 
         Author author = article.getAuthor();
 
@@ -54,16 +74,16 @@ public class ArticleService {
     }
 
 
-    public Article update(Article article) {
-
-        Article foundArticle = findArticleById(article.getId());
-
-        updateArticleFields(article, foundArticle);
-
-        articleDao.save(foundArticle);
-
-        return foundArticle;
-    }
+//    public Article update(Article article) {
+//
+//        Article foundArticle = findArticleById(article.getId());
+//
+//        updateArticleFields(article, foundArticle);
+//
+//        articleDao.save(foundArticle);
+//
+//        return foundArticle;
+//    }
 
 
     private void updateArticleFields(Article source, Article destination) {
@@ -73,4 +93,6 @@ public class ArticleService {
         destination.setAuthor(source.getAuthor());
         destination.setCategories(source.getCategories());
     }
+
+
 }
