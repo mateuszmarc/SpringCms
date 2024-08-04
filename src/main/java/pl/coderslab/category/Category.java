@@ -28,4 +28,15 @@ public class Category {
     @ToString.Exclude
     private List<Article> articles = new ArrayList<>();
 
+
+    private void addArticle(Article article) {
+        articles.removeIf(article1 -> article1.getId().equals(article.getId()));
+
+        articles.add(article);
+    }
+
+    public void removeArticle(Article article) {
+
+        articles.removeIf(article1 -> article1.getId().equals(article.getId()));
+    }
 }
