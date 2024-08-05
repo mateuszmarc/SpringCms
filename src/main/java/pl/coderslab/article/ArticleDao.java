@@ -33,4 +33,12 @@ public class ArticleDao {
 
         return query.getResultList();
     }
+
+    public List<Article> findLastFiveArticles() {
+
+        TypedQuery<Article> query = entityManager.createQuery("SELECT a FROM Article a ORDER BY a.created desc", Article.class);
+
+        query.setMaxResults(5);
+        return query.getResultList();
+    }
 }

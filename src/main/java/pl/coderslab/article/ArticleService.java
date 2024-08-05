@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.coderslab.article.dao.ArticleDTO;
+import pl.coderslab.article.dao.ArticleMapper;
 import pl.coderslab.author.Author;
 import pl.coderslab.author.AuthorDao;
 import pl.coderslab.category.CategoryDao;
@@ -22,6 +24,7 @@ public class ArticleService {
     private final ArticleDao articleDao;
     private final AuthorDao authorDao;
     private final CategoryDao categoryDao;
+    private final ArticleMapper articleMapper;
 
     public Article findArticleById(Long id) {
 
@@ -79,6 +82,12 @@ public class ArticleService {
         return articleDao.findAll();
     }
 
+    public List<ArticleDTO> findLastFiveArticles() {
+
+        List<Article> articles = articleDao.findLastFiveArticles();
+
+        return articles.stream().map(articleMapper::toDTO).toList();
+    }
 
     private void updateArticleFields(Article source, Article destination) {
 
