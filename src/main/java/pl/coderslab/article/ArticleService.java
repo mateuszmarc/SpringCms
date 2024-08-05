@@ -10,6 +10,7 @@ import pl.coderslab.category.CategoryDao;
 import pl.coderslab.exception.InvalidRequestException;
 import pl.coderslab.exception.ResourceNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -71,6 +72,11 @@ public class ArticleService {
         articleDao.save(foundArticle);
 
         return foundArticle;
+    }
+
+    public List<Article> findAllArticles() {
+
+        return articleDao.findAll();
     }
 
 

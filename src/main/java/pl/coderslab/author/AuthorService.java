@@ -6,6 +6,7 @@ import pl.coderslab.article.ArticleDao;
 import pl.coderslab.exception.ResourceNotFoundException;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -52,6 +53,10 @@ public class AuthorService {
         return author;
     }
 
+    public List<Author> findAllAuthors() {
+
+        return authorDao.findAll();
+    }
 
     private void updateAuthorFields(Author source, Author destination) {
 

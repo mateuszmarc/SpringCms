@@ -7,6 +7,7 @@ import pl.coderslab.article.ArticleDao;
 import pl.coderslab.exception.ResourceNotFoundException;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -62,6 +63,10 @@ public class CategoryService {
         return category;
     }
 
+    public List<Category> getAllCategories() {
+
+        return categoryDao.findAllCategories();
+    }
 
     private void updateCategoryFields(Category source, Category destination) {
 

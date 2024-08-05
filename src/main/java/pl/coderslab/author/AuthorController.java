@@ -4,12 +4,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/authors")
 public class AuthorController {
 
     private final AuthorService authorService;
+
+    @GetMapping
+    public ResponseEntity<String> findAllAuthors() {
+        List<Author> authors = authorService.findAllAuthors();
+
+        return ResponseEntity.ok(authors.toString());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> findById(@PathVariable Long id) {

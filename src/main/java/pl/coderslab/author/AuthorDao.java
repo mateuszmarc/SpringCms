@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -23,5 +25,12 @@ public class AuthorDao {
     public void delete(Author author) {
 
         entityManager.remove(author);
+    }
+
+    public List<Author> findAll() {
+
+        TypedQuery<Author> query = entityManager.createQuery("SELECT a FROM Author a", Author.class);
+
+        return query.getResultList();
     }
 }

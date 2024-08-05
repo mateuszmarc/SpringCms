@@ -4,12 +4,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
+
+    @GetMapping
+    public ResponseEntity<String> findAllCategories() {
+
+        List<Category> categories = categoryService.getAllCategories();
+
+        return ResponseEntity.ok(categories.toString());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> findById(@PathVariable Long id) {

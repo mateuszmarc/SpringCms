@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -11,6 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleController {
 
     private final ArticleService articleService;
+
+    @GetMapping
+    public ResponseEntity<String> findAllArticles() {
+        List<Article> articles = articleService.findAllArticles();
+
+        return ResponseEntity.ok(articles.toString());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> findArticleById(@PathVariable Long id) {
