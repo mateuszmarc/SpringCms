@@ -26,6 +26,14 @@ public class CategoryController {
         return ResponseEntity.ok(category.toString());
     }
 
+    @PutMapping
+    public ResponseEntity<String> updateCategory(@RequestBody Category category) {
+
+        Category updatadtedCategory = categoryService.update(category);
+
+        return ResponseEntity.ok(updatadtedCategory.toString());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
 

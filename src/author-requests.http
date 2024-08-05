@@ -1,0 +1,48 @@
+### GET request to find article by id
+GET http://localhost:8080/authors/3
+###
+
+### POST request to create author
+POST http://localhost:8080/authors
+Content-Type: application/json
+
+{
+  "firstName": "New Tech Trends",
+  "lastName": "An article about new tech trends.",
+  "articles": [
+    {"id": 3},
+    {"id": 4}
+  ]
+}
+
+### POST request to create author without author associated and categories
+POST http://localhost:8080/authors
+Content-Type: application/json
+
+{
+  "firstName": "New Tech Trends",
+  "lastName": "An article about new tech trends."
+}
+
+### POST request to create author without author associated and categories - invalid
+POST http://localhost:8080/authors
+Content-Type: application/json
+
+{
+  "id": 1,
+  "firstName": "New Tech Trends",
+  "lastName": "An article about new tech trends."
+}
+
+### PUT request to update author
+PUT http://localhost:8080/authors
+Content-Type: application/json
+
+{
+  "id": 3,
+  "firstName": "Updated Tech Trends",
+  "lastName": "An article about the updated tech trends."
+}
+
+### DELETE author by id
+DELETE http://localhost:8080/authors/14

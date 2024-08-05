@@ -13,8 +13,8 @@ Content-Type: application/json
     "id": 1
   },
   "categories": [
-    {"id": 1},
-    {"id": 2}
+    {"id": 3},
+    {"id": 4}
   ]
 }
 
@@ -37,5 +37,15 @@ Content-Type: application/json
   "content": "Test description."
 }
 
+### PUT request to create article without author associated and categories - invalid
+PUT http://localhost:8080/articles
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Test updated Article",
+  "content": "Test updated description."
+}
+
 ### DELETE article by id
-DELETE http://localhost:8080/articles/11
+DELETE http://localhost:8080/articles/14

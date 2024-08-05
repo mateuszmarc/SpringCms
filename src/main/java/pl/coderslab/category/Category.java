@@ -1,6 +1,7 @@
 package pl.coderslab.category;
 
 import lombok.Data;
+import lombok.ToString;
 import pl.coderslab.article.Article;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Category {
                     CascadeType.REFRESH
             },
             fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Article> articles = new ArrayList<>();
 
 

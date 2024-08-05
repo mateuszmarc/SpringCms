@@ -8,9 +8,15 @@ Content-Type: application/json
 
 {
   "name": "Science",
-  "description": "Science category.",
-  "articles": [
-    {"id": 1},
-    {"id": 2}
-  ]
+  "description": "Science category."
+}
+
+### PUT request to update category
+PUT http://localhost:8080/categories
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Science",
+  "description": "Science category."
 }
