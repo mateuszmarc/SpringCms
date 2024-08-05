@@ -24,7 +24,7 @@ public class Category {
                     CascadeType.MERGE,
                     CascadeType.REFRESH
             },
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Article> articles = new ArrayList<>();
 
 

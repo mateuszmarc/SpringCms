@@ -1,8 +1,9 @@
 package pl.coderslab.article;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.article.dto.ArticleDTO;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -12,25 +13,32 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping("/{id}")
-    public ArticleDTO findArticleById(@PathVariable Long id) {
-        return articleService.findArticleById(id);
+    public ResponseEntity<String> findArticleById(@PathVariable Long id) {
+        Article article =  articleService.findArticleById(id);
+
+        return ResponseEntity.ok(article.toString());
     }
 
     @PostMapping
-    public Article saveArticle(@RequestBody ArticleDTO articleDTO) {
+    public ResponseEntity<String> saveArticle(@RequestBody Article article) {
 
-        return articleService.save(articleDTO);
+        Article savedArticle =  articleService.save(article);
+
+        return ResponseEntity.ok(savedArticle.toString());
     }
 
-//    @PutMapping
-//    public Article updateArticle(@RequestBody Article article) {
-//
-//        return articleService.update(article);
-//    }
+    @PutMapping
+    public  ResponseEntity<String>  updateArticle(@RequestBody Article article) {
+
+        Article updatedArticle = articleService.update(article);
+        return ResponseEntity.ok(updatedArticle.toString());
+    }
 
     @DeleteMapping("/{id}")
-    public Article deleteArticleById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteArticleById(@PathVariable Long id) {
 
-        return  articleService.deleteById(id);
+        Article deletedArticle = articleService.deleteById(id);
+
+        return ResponseEntity.ok(deletedArticle.toString());
     }
 }

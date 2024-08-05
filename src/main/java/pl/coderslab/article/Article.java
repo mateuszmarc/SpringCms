@@ -34,6 +34,7 @@ public class Article {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "author_id")
+    @ToString.Exclude
     private Author author;
 
     @ManyToMany(cascade = {
@@ -41,7 +42,7 @@ public class Article {
             CascadeType.MERGE,
             CascadeType.REFRESH
     },
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     @JoinTable(name = "articles_categories",
             joinColumns = @JoinColumn(name = "article_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))

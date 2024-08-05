@@ -1,8 +1,8 @@
 package pl.coderslab.category;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.category.dto.CategoryDTO;
 
 @RequiredArgsConstructor
 @RestController
@@ -12,19 +12,25 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/{id}")
-    public CategoryDTO findById(@PathVariable Long id) {
-        return categoryService.findById(id);
+    public ResponseEntity<String> findById(@PathVariable Long id) {
+        Category category = categoryService.findById(id);
+
+        return ResponseEntity.ok(category.toString());
     }
 
     @PostMapping
-    public CategoryDTO saveCategory(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<String> saveCategory(@RequestBody Category categoryDTO) {
 
-        return categoryService.save(categoryDTO);
+        Category category = categoryService.save(categoryDTO);
+
+        return ResponseEntity.ok(category.toString());
     }
 
     @DeleteMapping("/{id}")
-    public CategoryDTO deleteById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
 
-        return categoryService.deleteById(id);
+        Category category = categoryService.deleteById(id);
+
+        return ResponseEntity.ok(category.toString());
     }
 }

@@ -1,5 +1,5 @@
 ### GET request to find article by id
-GET http://localhost:8080/articles/1
+GET http://localhost:8080/articles/5
 ###
 
 ### POST request to create article
@@ -36,3 +36,6 @@ Content-Type: application/json
   "title": "Test Article",
   "content": "Test description."
 }
+
+### DELETE article by id
+DELETE http://localhost:8080/articles/11
